@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jd07</title>
+    <script type="text/javascript">
+        function Parent() {
+            this.color = ["red","blue"];
+        }
+        function Child() {
+            //在child中的this明显应该是指向child的对象
+            //当调用Parent方法的时候，而且this又是指向了child
+            //此时就等于在这里完成this.color = ["red","blue"]
+            //也就等于child中有了this.color属性，这样也就变相的完成了继承
+            Parent.call(this);
+            //这种调用方式，就仅仅完成了函数的调用，根本无法实现继承
+            //Parent();
+        }
+
+        var c1 = new Child();
+        c1.color.push("green");
+        alert(c1.color);
+        var c2 = new Child();
+        alert(c2.color);
+    </script>
+</head>
+<body>
+</body>
+</html>
